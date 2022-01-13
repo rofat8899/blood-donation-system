@@ -24,12 +24,14 @@ public class BloodRequestEntity {
     private LocalDateTime closeDate;
     @Column(name="REQUEST_BLOOD_TYPE")
     private String requestBloodType;
-    @Column(name="PRIORITY_STATUS")
-    private String priorityStatus;
     @Column(name="BLOOD_RECEIVED_ID")
     private String bloodReceviedId;
     @Column(name="BLOOD_RECEIVED_DATE")
     private LocalDateTime bloodReceivedDate;
+    @Column(name="PRIORITY_STATUS")
+    private String priorityStatus;
+    @Column(name="REQUEST_STATUS")
+    private String requestStatus;
     @Column(name="REMARK")
     private String remark;
 
