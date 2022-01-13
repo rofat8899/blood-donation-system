@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class BloodRequestDTO {
     private String requestEmail;
     private LocalDateTime requestDate;
-    private LocalDateTime closeDate;
+    private String closeDate;
     private String requestBloodType;
     private String bloodReceviedId;
     private LocalDateTime bloodReceivedDate;

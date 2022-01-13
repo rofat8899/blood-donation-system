@@ -21,7 +21,7 @@ public class BloodRequestEntity {
     @Column(name="REQUEST_DATE")
     private LocalDateTime requestDate;
     @Column(name="CLOSE_DATE")
-    private LocalDateTime closeDate;
+    private String closeDate;
     @Column(name="REQUEST_BLOOD_TYPE")
     private String requestBloodType;
     @Column(name="BLOOD_RECEIVED_ID")

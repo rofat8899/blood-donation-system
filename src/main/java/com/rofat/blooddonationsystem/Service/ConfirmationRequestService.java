@@ -26,7 +26,7 @@ public class ConfirmationRequestService {
     public ConfirmRequestDTO acceptRequest(String req_email,Map<String, Object> obj) {
         if(isHospital(obj)){
             BloodRequestEntity bloodRequest = bloodRequestRepo.findByRequestEmail(req_email);
-            for(BloodDonationEntity each :bloodDonationRepo.findByStatus("AVAILABLE"))
+            for(BloodDonationEntity each :bloodDonationRepo.findByStatus("PENDING"))
             {
                 if(userDetailRepo.findByEmailAndBloodType(each.getDonorEmail(),bloodRequest.getRequestBloodType())){
                     bloodRequest.setBloodReceviedId(each.getIdAsString());
@@ -36,6 +36,7 @@ public class ConfirmationRequestService {
 
                     each.setStatus("NOT AVAILABLE");
                     bloodDonationRepo.save(each);
+                    return new ConfirmRequestDTO(each,bloodRequest,(String) obj.get("email"));
                 }
             }
         }
