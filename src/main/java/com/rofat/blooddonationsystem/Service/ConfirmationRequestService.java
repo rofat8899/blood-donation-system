@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -24,15 +25,19 @@ public class ConfirmationRequestService {
 
     public ConfirmRequestDTO acceptRequest(String req_email,Map<String, Object> obj) {
         if(isHospital(obj)){
-            BloodDonationEntity bloodDonation = bloodDonationRepo.findByDonorEmail(req_email);
             BloodRequestEntity bloodRequest = bloodRequestRepo.findByRequestEmail(req_email);
-            bloodRequest.setBloodReceviedId(bloodDonation.getIdAsString());
-            bloodRequest.setBloodReceivedDate(LocalDateTime.now());
-            bloodRequest.setRequestStatus("ACCEPTED");
-            bloodRequestRepo.save(bloodRequest);
+            for(BloodDonationEntity each :bloodDonationRepo.findByStatus("AVAILABLE"))
+            {
+                if(userDetailRepo.findByEmailAndBloodType(each.getDonorEmail(),bloodRequest.getRequestBloodType())){
+                    bloodRequest.setBloodReceviedId(each.getIdAsString());
+                    bloodRequest.setBloodReceivedDate(LocalDateTime.now());
+                    bloodRequest.setRequestStatus("ACCEPTED");
+                    bloodRequestRepo.save(bloodRequest);
 
-            bloodDonation.setStatus("NOT AVAILABLE");
-            bloodDonationRepo.save(bloodDonation);
+                    each.setStatus("NOT AVAILABLE");
+                    bloodDonationRepo.save(each);
+                }
+            }
         }
         else{
             System.out.println("YOU HAVE NO RIGHT FOR THIS ACTION");
