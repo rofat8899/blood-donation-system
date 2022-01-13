@@ -25,4 +25,9 @@ public class BloodDonationEntity {
     @Column(name="REMARK")
     private String remark;
 
+    public String getIdAsString()
+    {
+        return String.valueOf(id);
+    }
+
 }
