@@ -57,7 +57,7 @@ public class UserController {
     }
 
     @GetMapping("/request/{email}")
-    public BloodRequestDTO getBloodRequestByEmail(@PathVariable("email") String email){
+    public List<BloodRequestDTO> getBloodRequestByEmail(@PathVariable("email") String email){
         return bloodRequestService.getBloodRequestByEmail(email);
     }
 
@@ -67,7 +67,7 @@ public class UserController {
     }
 
     @GetMapping("/donation/{email}")
-    public BloodDonationDTO getBloodDonationByEmail(@PathVariable("email") String email){
+    public List<BloodDonationDTO> getBloodDonationByEmail(@PathVariable("email") String email){
         return bloodDonationService.getBloodDonationByEmail(email);
     }
 }

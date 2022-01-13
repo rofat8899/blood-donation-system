@@ -1,6 +1,7 @@
 package com.rofat.blooddonationsystem.Service;
 
 import com.rofat.blooddonationsystem.Dto.BloodDonationDTO;
+import com.rofat.blooddonationsystem.Dto.BloodRequestDTO;
 import com.rofat.blooddonationsystem.Entity.BloodDonationEntity;
 import com.rofat.blooddonationsystem.Repository.BloodDonationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,13 @@ public class BloodDonationService {
         return bloodDonationDTO;
     }
 
-    public BloodDonationDTO getBloodDonationByEmail(String email) {
-        return new BloodDonationDTO(bloodDonationRepo.findByDonorEmail(email));
+    public List<BloodDonationDTO> getBloodDonationByEmail(String email) {
+        List<BloodDonationDTO> bloodDonationDTO = new ArrayList<>();
+        for(BloodDonationEntity each:bloodDonationRepo.findByDonorEmail(email))
+        {
+            bloodDonationDTO.add(new BloodDonationDTO(each));
+        }
+        return bloodDonationDTO;
     }
 
     public BloodDonationDTO addBloodDonation(BloodDonationEntity bloodDonationEntity) {

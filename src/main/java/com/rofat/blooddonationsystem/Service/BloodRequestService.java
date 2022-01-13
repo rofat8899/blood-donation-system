@@ -25,8 +25,13 @@ public class BloodRequestService {
         return bloodRequestDTO;
     }
 
-    public BloodRequestDTO getBloodRequestByEmail(String email) {
-        return new BloodRequestDTO(bloodRequestRepo.findByRequestEmail(email));
+    public List<BloodRequestDTO> getBloodRequestByEmail(String email) {
+        List<BloodRequestDTO> bloodRequestDTO = new ArrayList<>();
+        for(BloodRequestEntity each:bloodRequestRepo.findByRequestsEmail(email))
+        {
+            bloodRequestDTO.add(new BloodRequestDTO(each));
+        }
+        return bloodRequestDTO;
     }
 
     public BloodRequestDTO addBloodRequest(BloodRequestEntity bloodRequestEntity) {
