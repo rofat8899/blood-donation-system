@@ -17,12 +17,13 @@ public class UserDetailDTO {
     private UserAddressDTO address;
     private UserContactDTO contact;
     public UserDetailDTO(UserDetailEntity userDetailEntity){
+        System.out.println(userDetailEntity.toString());
         this.email = userDetailEntity.getEmail();
         this.name = userDetailEntity.getName();
         this.gender = userDetailEntity.getGender();
         this.age = userDetailEntity.getAge();
         this.bloodType = userDetailEntity.getBloodType();
-        this.bloodType = userDetailEntity.getUserType();
+        this.userType = userDetailEntity.getUserType();
         this.address = new UserAddressDTO(userDetailEntity.getAddress());
         this.contact = new UserContactDTO(userDetailEntity.getContact());
     }
