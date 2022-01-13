@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "BLOOD_DONATION")
 public class BloodDonationEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -19,6 +20,8 @@ public class BloodDonationEntity {
     private LocalDateTime donatedDate;
     @Column(name="DONOR_EMAIL")
     private String donorEmail;
+    @Column(name="STATUS")
+    private String status;
     @Column(name="REMARK")
     private String remark;
 
