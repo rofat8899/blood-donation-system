@@ -1,7 +1,5 @@
 package com.rofat.blooddonationsystem.Dto;
 
-import com.rofat.blooddonationsystem.Entity.UserAddressEntity;
-import com.rofat.blooddonationsystem.Entity.UserContactEntity;
 import com.rofat.blooddonationsystem.Entity.UserDetailEntity;
 import lombok.Getter;
 import lombok.Setter;
