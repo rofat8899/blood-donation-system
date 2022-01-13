@@ -7,6 +7,7 @@ import com.rofat.blooddonationsystem.Repository.BloodDonationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,8 @@ public class BloodDonationService {
     }
 
     public BloodDonationDTO addBloodDonation(BloodDonationEntity bloodDonationEntity) {
+        bloodDonationEntity.setDonatedDate(LocalDateTime.now());
+        bloodDonationEntity.setStatus("AVAILABLE");
         return new BloodDonationDTO(bloodDonationRepo.save(bloodDonationEntity));
     }
 
