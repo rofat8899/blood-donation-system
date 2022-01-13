@@ -12,7 +12,7 @@ public class UserDetailDTO {
     private String gender;
     private String age;
     private String bloodType;
-    private String usertype;
+    private String userType;
 
     private UserAddressDTO address;
     private UserContactDTO contact;
@@ -22,7 +22,7 @@ public class UserDetailDTO {
         this.gender = userDetailEntity.getGender();
         this.age = userDetailEntity.getAge();
         this.bloodType = userDetailEntity.getBloodType();
-        this.usertype = userDetailEntity.getUsertype();
+        this.bloodType = userDetailEntity.getUserType();
         this.address = new UserAddressDTO(userDetailEntity.getAddress());
         this.contact = new UserContactDTO(userDetailEntity.getContact());
     }

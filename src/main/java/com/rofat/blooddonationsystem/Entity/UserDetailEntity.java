@@ -28,7 +28,7 @@ public class UserDetailEntity {
     @Column(name="BLOOD_TYPE")
     private String bloodType;
     @Column(name="USER_TYPE")
-    private String usertype;
+    private String userType;
     @OneToOne(cascade = CascadeType.ALL)
     private UserAddressEntity address;
     @OneToOne(cascade = CascadeType.ALL)

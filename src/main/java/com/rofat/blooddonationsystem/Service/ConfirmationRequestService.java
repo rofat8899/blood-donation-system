@@ -51,6 +51,6 @@ public class ConfirmationRequestService {
         String UserEmail = (String) obj.get("email");
         String UserPassword = (String) obj.get("password");
         UserDetailEntity userDetailEntity = userDetailRepo.findByEmailAndPassword(UserEmail,UserPassword);
-        return userDetailEntity.getUsertype().equals("HOSPITAL");
+        return userDetailEntity.getUserType().equals("HOSPITAL");
     }
 }
