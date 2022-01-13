@@ -24,10 +24,23 @@ public class BloodController {
         return bloodDonationService.getAllBloodDonation();
     }
 
+    @GetMapping("/donation/available")
+    public List<BloodDonationDTO> getAllAvailableBloodDonation(){
+        return bloodDonationService.getAllBloodAvailableDonation();
+    }
+
     @GetMapping("/request")
     public List<BloodRequestDTO> getAllBloodRequest(){
         return bloodRequestService.getAllBloodRequest();
     }
+
+    @GetMapping("/request/pending")
+    public List<BloodRequestDTO> getAllBloodPendingRequest()
+    {
+        return bloodRequestService.getAllBloodPendingRequest();
+    }
+
+
 
 
 

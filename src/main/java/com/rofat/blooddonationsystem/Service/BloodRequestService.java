@@ -1,6 +1,8 @@
 package com.rofat.blooddonationsystem.Service;
 
+import com.rofat.blooddonationsystem.Dto.BloodDonationDTO;
 import com.rofat.blooddonationsystem.Dto.BloodRequestDTO;
+import com.rofat.blooddonationsystem.Entity.BloodDonationEntity;
 import com.rofat.blooddonationsystem.Entity.BloodRequestEntity;
 import com.rofat.blooddonationsystem.Repository.BloodRequestRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +31,14 @@ public class BloodRequestService {
 
     public BloodRequestDTO addBloodRequest(BloodRequestEntity bloodRequestEntity) {
         return new BloodRequestDTO(bloodRequestRepo.save(bloodRequestEntity));
+    }
+
+    public List<BloodRequestDTO> getAllBloodPendingRequest() {
+        List<BloodRequestDTO> bloodRequestDTO = new ArrayList<>();
+        for(BloodRequestEntity each:bloodRequestRepo.findAllByRequestStatus("PENDING"))
+        {
+            bloodRequestDTO.add(new BloodRequestDTO(each));
+        }
+        return bloodRequestDTO;
     }
 }

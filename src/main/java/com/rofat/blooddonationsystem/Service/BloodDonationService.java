@@ -30,4 +30,13 @@ public class BloodDonationService {
     public BloodDonationDTO addBloodDonation(BloodDonationEntity bloodDonationEntity) {
         return new BloodDonationDTO(bloodDonationRepo.save(bloodDonationEntity));
     }
+
+    public List<BloodDonationDTO> getAllBloodAvailableDonation() {
+        List<BloodDonationDTO> bloodDonationDTO = new ArrayList<>();
+        for(BloodDonationEntity each:bloodDonationRepo.findAllByStatus("AVAILABLE"))
+        {
+            bloodDonationDTO.add(new BloodDonationDTO(each));
+        }
+        return bloodDonationDTO;
+    }
 }
