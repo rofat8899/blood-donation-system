@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface BloodRequestRepo extends JpaRepository<BloodRequestEntity,Integer> {
     BloodRequestEntity findByRequestEmail(String email);
-    List<BloodRequestEntity> findByRequestsEmail(String email);
+    List<BloodRequestEntity> findBloodRequestEntityByRequestEmail(String email);
     List<BloodRequestEntity> findAllByRequestStatus(String status);
 }

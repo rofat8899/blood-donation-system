@@ -27,7 +27,7 @@ public class BloodRequestService {
 
     public List<BloodRequestDTO> getBloodRequestByEmail(String email) {
         List<BloodRequestDTO> bloodRequestDTO = new ArrayList<>();
-        for(BloodRequestEntity each:bloodRequestRepo.findByRequestsEmail(email))
+        for(BloodRequestEntity each:bloodRequestRepo.findBloodRequestEntityByRequestEmail(email))
         {
             bloodRequestDTO.add(new BloodRequestDTO(each));
         }

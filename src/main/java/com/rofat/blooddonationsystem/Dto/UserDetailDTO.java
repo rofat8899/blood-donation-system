@@ -16,8 +16,8 @@ public class UserDetailDTO {
     private String bloodType;
     private String usertype;
 
-    private UserAddressEntity address;
-    private UserContactEntity contact;
+    private UserAddressDTO address;
+    private UserContactDTO contact;
     public UserDetailDTO(UserDetailEntity userDetailEntity){
         this.email = userDetailEntity.getEmail();
         this.name = userDetailEntity.getName();
@@ -25,5 +25,7 @@ public class UserDetailDTO {
         this.age = userDetailEntity.getAge();
         this.bloodType = userDetailEntity.getBloodType();
         this.usertype = userDetailEntity.getUsertype();
+        this.address = new UserAddressDTO(userDetailEntity.getAddress());
+        this.contact = new UserContactDTO(userDetailEntity.getContact());
     }
 }
