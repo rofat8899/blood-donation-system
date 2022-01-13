@@ -8,6 +8,7 @@ import com.rofat.blooddonationsystem.Repository.BloodRequestRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +36,8 @@ public class BloodRequestService {
     }
 
     public BloodRequestDTO addBloodRequest(BloodRequestEntity bloodRequestEntity) {
+        bloodRequestEntity.setRequestDate(LocalDateTime.now());
+        bloodRequestEntity.setRequestStatus("PENDING");
         return new BloodRequestDTO(bloodRequestRepo.save(bloodRequestEntity));
     }
 
