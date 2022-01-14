@@ -56,4 +56,13 @@ public class BloodDonationService {
         }
         return bloodDonationDTO;
     }
+
+    public List<BloodDonationDTO> getAllBloodDonationByHospital(String hospital) {
+        List<BloodDonationDTO> bloodDonationDTO = new ArrayList<>();
+        for(BloodDonationEntity each:bloodDonationRepo.findAllByDonatedAt(hospital))
+        {
+            bloodDonationDTO.add(new BloodDonationDTO(each));
+        }
+        return bloodDonationDTO;
+    }
 }

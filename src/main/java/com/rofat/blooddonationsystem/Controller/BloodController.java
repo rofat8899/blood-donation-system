@@ -6,6 +6,7 @@ import com.rofat.blooddonationsystem.Service.BloodDonationService;
 import com.rofat.blooddonationsystem.Service.BloodRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +25,11 @@ public class BloodController {
         return bloodDonationService.getAllBloodDonation();
     }
 
+    @GetMapping("/donation/{hospital}")
+    public List<BloodDonationDTO> getAllBloodDonationByHospital(@PathVariable("hospital") String hospital){
+        return bloodDonationService.getAllBloodDonationByHospital(hospital);
+    }
+
     @GetMapping("/donation/available")
     public List<BloodDonationDTO> getAllAvailableBloodDonation(){
         return bloodDonationService.getAllBloodAvailableDonation();
@@ -39,10 +45,5 @@ public class BloodController {
     {
         return bloodRequestService.getAllBloodPendingRequest();
     }
-
-
-
-
-
-
+    
 }
