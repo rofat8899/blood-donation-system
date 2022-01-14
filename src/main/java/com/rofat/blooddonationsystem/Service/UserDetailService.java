@@ -37,7 +37,7 @@ public class UserDetailService {
         String password = (String) obj.get("password");
         if(userDetailRepo.existsByEmailAndPassword(email,password))
         {
-            return new UserDetailDTO(userDetailRepo.findByEmail(email));
+            return new ResponseMessage("Successful login");
         }
         else {
             return new ResponseMessage("Failed to login");

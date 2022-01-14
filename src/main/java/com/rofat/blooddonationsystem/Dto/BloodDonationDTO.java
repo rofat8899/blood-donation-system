@@ -11,11 +11,13 @@ import java.time.LocalDateTime;
 public class BloodDonationDTO {
     private LocalDateTime donatedDate;
     private String donorEmail;
+    private String donatedAt;
     private String status;
     private String remark;
     public BloodDonationDTO(BloodDonationEntity bloodDonationEntity){
         this.donatedDate = bloodDonationEntity.getDonatedDate();
         this.donorEmail = bloodDonationEntity.getDonorEmail();
+        this.donatedAt = bloodDonationEntity.getDonatedAt();
         this.status = bloodDonationEntity.getStatus();
         this.remark = bloodDonationEntity.getRemark();
     }
