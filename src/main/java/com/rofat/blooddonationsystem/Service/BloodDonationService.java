@@ -1,7 +1,6 @@
 package com.rofat.blooddonationsystem.Service;
 
 import com.rofat.blooddonationsystem.Dto.BloodDonationDTO;
-import com.rofat.blooddonationsystem.Dto.BloodRequestDTO;
 import com.rofat.blooddonationsystem.Dto.ResponseMessage;
 import com.rofat.blooddonationsystem.Entity.BloodDonationEntity;
 import com.rofat.blooddonationsystem.Repository.BloodDonationRepo;
@@ -38,9 +37,10 @@ public class BloodDonationService {
         return bloodDonationDTO;
     }
 
-    public Object addBloodDonation(BloodDonationEntity bloodDonationEntity) {
+    public Object addBloodDonation(BloodDonationEntity bloodDonationEntity,String hospital) {
         if(userDetailRepo.existsByEmail(bloodDonationEntity.getDonorEmail()))
         {
+            bloodDonationEntity.setDonatedAt(userDetailRepo.findByNameAndUserType(hospital,"HOSPITAL").getName());
             bloodDonationEntity.setDonatedDate(LocalDateTime.now());
             bloodDonationEntity.setStatus("AVAILABLE");
             return new BloodDonationDTO(bloodDonationRepo.save(bloodDonationEntity));

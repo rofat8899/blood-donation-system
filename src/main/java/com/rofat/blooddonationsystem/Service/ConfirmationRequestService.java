@@ -4,7 +4,6 @@ import com.rofat.blooddonationsystem.Dto.ConfirmRequestDTO;
 import com.rofat.blooddonationsystem.Dto.ResponseMessage;
 import com.rofat.blooddonationsystem.Entity.BloodDonationEntity;
 import com.rofat.blooddonationsystem.Entity.BloodRequestEntity;
-import com.rofat.blooddonationsystem.Entity.UserDetailEntity;
 import com.rofat.blooddonationsystem.Repository.BloodDonationRepo;
 import com.rofat.blooddonationsystem.Repository.BloodRequestRepo;
 import com.rofat.blooddonationsystem.Repository.UserDetailRepo;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Map;
 
 @Service

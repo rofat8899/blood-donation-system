@@ -61,9 +61,9 @@ public class UserController {
         return bloodRequestService.getBloodRequestByEmail(email);
     }
 
-    @PostMapping("/donation")
-    public Object addBloodDonation(@RequestBody BloodDonationEntity bloodDonationEntity){
-        return bloodDonationService.addBloodDonation(bloodDonationEntity);
+    @PostMapping("/donation/{hospital}")
+    public Object addBloodDonation(@RequestBody BloodDonationEntity bloodDonationEntity,@PathVariable("hospital") String hospital){
+        return bloodDonationService.addBloodDonation(bloodDonationEntity,hospital);
     }
 
     @GetMapping("/donation/{email}")
