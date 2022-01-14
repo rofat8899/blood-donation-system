@@ -62,7 +62,7 @@ public class UserController {
     }
 
     @PostMapping("/donation")
-    public BloodDonationDTO addBloodDonation(@RequestBody BloodDonationEntity bloodDonationEntity){
+    public Object addBloodDonation(@RequestBody BloodDonationEntity bloodDonationEntity){
         return bloodDonationService.addBloodDonation(bloodDonationEntity);
     }
 

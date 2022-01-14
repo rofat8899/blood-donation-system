@@ -2,8 +2,10 @@ package com.rofat.blooddonationsystem.Service;
 
 import com.rofat.blooddonationsystem.Dto.BloodDonationDTO;
 import com.rofat.blooddonationsystem.Dto.BloodRequestDTO;
+import com.rofat.blooddonationsystem.Dto.ResponseMessage;
 import com.rofat.blooddonationsystem.Entity.BloodDonationEntity;
 import com.rofat.blooddonationsystem.Repository.BloodDonationRepo;
+import com.rofat.blooddonationsystem.Repository.UserDetailRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,8 @@ import java.util.List;
 public class BloodDonationService {
     @Autowired
     private BloodDonationRepo bloodDonationRepo;
+    @Autowired
+    private UserDetailRepo userDetailRepo;
 
     public List<BloodDonationDTO> getAllBloodDonation() {
         List<BloodDonationDTO> bloodDonationDTO = new ArrayList<>();
@@ -34,10 +38,14 @@ public class BloodDonationService {
         return bloodDonationDTO;
     }
 
-    public BloodDonationDTO addBloodDonation(BloodDonationEntity bloodDonationEntity) {
-        bloodDonationEntity.setDonatedDate(LocalDateTime.now());
-        bloodDonationEntity.setStatus("AVAILABLE");
-        return new BloodDonationDTO(bloodDonationRepo.save(bloodDonationEntity));
+    public Object addBloodDonation(BloodDonationEntity bloodDonationEntity) {
+        if(userDetailRepo.existsByEmail(bloodDonationEntity.getDonorEmail()))
+        {
+            bloodDonationEntity.setDonatedDate(LocalDateTime.now());
+            bloodDonationEntity.setStatus("AVAILABLE");
+            return new BloodDonationDTO(bloodDonationRepo.save(bloodDonationEntity));
+        }
+        return new ResponseMessage("User is not existed");
     }
 
     public List<BloodDonationDTO> getAllBloodAvailableDonation() {
