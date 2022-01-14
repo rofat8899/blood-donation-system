@@ -26,9 +26,9 @@ public class ConfirmationRequestService {
     public ConfirmRequestDTO acceptRequest(String req_email,Map<String, Object> obj) {
         if(isHospital(obj)){
             BloodRequestEntity bloodRequest = bloodRequestRepo.findByRequestEmail(req_email);
-            for(BloodDonationEntity each :bloodDonationRepo.findByStatus("PENDING"))
+            for(BloodDonationEntity each :bloodDonationRepo.findByStatus("AVAILABLE"))
             {
-                if(userDetailRepo.findByEmailAndBloodType(each.getDonorEmail(),bloodRequest.getRequestBloodType())){
+                if(userDetailRepo.existsByEmailAndBloodType(each.getDonorEmail(),bloodRequest.getRequestBloodType())){
                     bloodRequest.setBloodReceviedId(each.getIdAsString());
                     bloodRequest.setBloodReceivedDate(LocalDateTime.now());
                     bloodRequest.setRequestStatus("ACCEPTED");
@@ -51,7 +51,6 @@ public class ConfirmationRequestService {
     {
         String UserEmail = (String) obj.get("email");
         String UserPassword = (String) obj.get("password");
-        UserDetailEntity userDetailEntity = userDetailRepo.findByEmailAndPassword(UserEmail,UserPassword);
-        return userDetailEntity.getUserType().equals("HOSPITAL");
+        return userDetailRepo.existsByEmailAndPasswordAndUserType(UserEmail,UserPassword,"HOSPITAL");
     }
 }
