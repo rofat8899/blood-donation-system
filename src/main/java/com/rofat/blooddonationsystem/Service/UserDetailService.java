@@ -1,5 +1,6 @@
 package com.rofat.blooddonationsystem.Service;
 
+import com.rofat.blooddonationsystem.Dto.ResponseMessage;
 import com.rofat.blooddonationsystem.Dto.UserDetailDTO;
 import com.rofat.blooddonationsystem.Entity.UserDetailEntity;
 import com.rofat.blooddonationsystem.Repository.UserDetailRepo;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserDetailService {
@@ -28,5 +30,17 @@ public class UserDetailService {
 
     public UserDetailDTO addUserDetail(UserDetailEntity userDetailEntity) {
         return new UserDetailDTO(userDetailRepo.save(userDetailEntity));
+    }
+
+    public Object login(Map<String, Object> obj) {
+        String email = (String) obj.get("email");
+        String password = (String) obj.get("password");
+        if(userDetailRepo.existsByEmailAndPassword(email,password))
+        {
+            return new UserDetailDTO(userDetailRepo.findByEmail(email));
+        }
+        else {
+            return new ResponseMessage("Failed to login");
+        }
     }
 }

@@ -70,4 +70,9 @@ public class UserController {
     public List<BloodDonationDTO> getBloodDonationByEmail(@PathVariable("email") String email){
         return bloodDonationService.getBloodDonationByEmail(email);
     }
+
+    @GetMapping("/login")
+    public Object login(@RequestBody Map<String,Object> obj){
+        return userDetailService.login(obj);
+    }
 }
