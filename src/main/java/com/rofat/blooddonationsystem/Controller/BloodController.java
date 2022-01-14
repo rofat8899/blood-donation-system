@@ -35,6 +35,11 @@ public class BloodController {
         return bloodDonationService.getAllBloodAvailableDonation();
     }
 
+    @GetMapping("/donation/available/{hospital}")
+    public List<BloodDonationDTO> getAllAvailableBloodDonationByHospital(@PathVariable("hospital") String hospital){
+        return bloodDonationService.getAllBloodAvailableDonationByHospital(hospital);
+    }
+
     @GetMapping("/request")
     public List<BloodRequestDTO> getAllBloodRequest(){
         return bloodRequestService.getAllBloodRequest();
@@ -45,5 +50,5 @@ public class BloodController {
     {
         return bloodRequestService.getAllBloodPendingRequest();
     }
-    
+
 }
