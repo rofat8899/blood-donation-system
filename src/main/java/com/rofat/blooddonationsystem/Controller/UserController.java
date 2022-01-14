@@ -46,13 +46,13 @@ public class UserController {
     }
 
     @PutMapping("/confirm/{email}")
-    public ConfirmRequestDTO confirmBloodRequest(@PathVariable("email") String email, @RequestBody Map<String,Object> obj)
+    public Object confirmBloodRequest(@PathVariable("email") String email, @RequestBody Map<String,Object> obj)
     {
         return confirmationRequestService.acceptRequest(email,obj);
     }
 
     @PostMapping("/request")
-    public BloodRequestDTO addBloodRequest(@RequestBody BloodRequestEntity bloodRequestEntity){
+    public Object addBloodRequest(@RequestBody BloodRequestEntity bloodRequestEntity){
         return bloodRequestService.addBloodRequest(bloodRequestEntity);
     }
 

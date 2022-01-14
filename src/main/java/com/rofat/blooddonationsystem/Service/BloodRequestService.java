@@ -1,8 +1,10 @@
 package com.rofat.blooddonationsystem.Service;
 
 import com.rofat.blooddonationsystem.Dto.BloodRequestDTO;
+import com.rofat.blooddonationsystem.Dto.ResponseMessage;
 import com.rofat.blooddonationsystem.Entity.BloodRequestEntity;
 import com.rofat.blooddonationsystem.Repository.BloodRequestRepo;
+import com.rofat.blooddonationsystem.Repository.UserDetailRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ import java.util.List;
 public class BloodRequestService {
     @Autowired
     private BloodRequestRepo bloodRequestRepo;
+    @Autowired
+    private UserDetailRepo userDetailRepo;
 
     public List<BloodRequestDTO> getAllBloodRequest() {
         List<BloodRequestDTO> bloodRequestDTO = new ArrayList<>();
@@ -33,10 +37,17 @@ public class BloodRequestService {
         return bloodRequestDTO;
     }
 
-    public BloodRequestDTO addBloodRequest(BloodRequestEntity bloodRequestEntity) {
-        bloodRequestEntity.setRequestDate(LocalDateTime.now());
-        bloodRequestEntity.setRequestStatus("PENDING");
-        return new BloodRequestDTO(bloodRequestRepo.save(bloodRequestEntity));
+    public Object addBloodRequest(BloodRequestEntity bloodRequestEntity) {
+        if(userDetailRepo.existsByEmail(bloodRequestEntity.getRequestEmail()))
+        {
+            bloodRequestEntity.setRequestDate(LocalDateTime.now());
+            bloodRequestEntity.setRequestStatus("PENDING");
+            return new BloodRequestDTO(bloodRequestRepo.save(bloodRequestEntity));
+        }
+        else
+        {
+            return new ResponseMessage("Requested User is not exists");
+        }
     }
 
     public List<BloodRequestDTO> getAllBloodPendingRequest() {

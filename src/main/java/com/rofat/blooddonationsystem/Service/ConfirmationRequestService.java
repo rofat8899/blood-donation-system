@@ -1,6 +1,7 @@
 package com.rofat.blooddonationsystem.Service;
 
 import com.rofat.blooddonationsystem.Dto.ConfirmRequestDTO;
+import com.rofat.blooddonationsystem.Dto.ResponseMessage;
 import com.rofat.blooddonationsystem.Entity.BloodDonationEntity;
 import com.rofat.blooddonationsystem.Entity.BloodRequestEntity;
 import com.rofat.blooddonationsystem.Entity.UserDetailEntity;
@@ -23,7 +24,7 @@ public class ConfirmationRequestService {
     @Autowired
     private UserDetailRepo userDetailRepo;
 
-    public ConfirmRequestDTO acceptRequest(String req_email,Map<String, Object> obj) {
+    public Object acceptRequest(String req_email,Map<String, Object> obj) {
         if(isHospital(obj)){
             BloodRequestEntity bloodRequest = bloodRequestRepo.findByRequestEmail(req_email);
             for(BloodDonationEntity each :bloodDonationRepo.findByStatus("AVAILABLE"))
@@ -41,9 +42,8 @@ public class ConfirmationRequestService {
             }
         }
         else{
-            System.out.println("YOU HAVE NO RIGHT FOR THIS ACTION");
+            return new ResponseMessage("YOU HAVE NO RIGHT FOR THIS ACTION");
         }
-
         return null;
     }
 
