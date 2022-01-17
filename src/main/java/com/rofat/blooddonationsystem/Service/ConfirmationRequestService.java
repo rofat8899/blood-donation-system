@@ -22,7 +22,7 @@ public class ConfirmationRequestService {
     @Autowired
     private UserDetailRepo userDetailRepo;
 
-    public Object acceptRequest(String req_email,Map<String, Object> obj) {
+    public Object acceptRequestByHospital(String req_email,Map<String, Object> obj) {
         if(isHospital(obj)){
             BloodRequestEntity bloodRequest = bloodRequestRepo.findByRequestEmail(req_email);
             for(BloodDonationEntity each :bloodDonationRepo.findAllByStatus("AVAILABLE"))
@@ -50,5 +50,12 @@ public class ConfirmationRequestService {
         String UserEmail = (String) obj.get("email");
         String UserPassword = (String) obj.get("password");
         return userDetailRepo.existsByEmailAndPasswordAndUserType(UserEmail,UserPassword,"HOSPITAL");
+    }
+
+    public Object confirmRequest(int id,Map<String,Object> obj) {
+        BloodRequestEntity bloodRequestEntity = bloodRequestRepo.findById(id);
+        bloodRequestEntity.setRemark("Date to donate: "+ obj.get("donateDate")+"   "+"At "+ obj.get("hospital")+" (hospital)");
+        bloodRequestRepo.save(bloodRequestEntity);
+        return new ResponseMessage("Success");
     }
 }

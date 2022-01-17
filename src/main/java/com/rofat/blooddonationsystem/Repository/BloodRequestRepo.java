@@ -9,4 +9,5 @@ public interface BloodRequestRepo extends JpaRepository<BloodRequestEntity,Integ
     BloodRequestEntity findByRequestEmail(String email);
     List<BloodRequestEntity> findBloodRequestEntityByRequestEmail(String email);
     List<BloodRequestEntity> findAllByRequestStatus(String status);
+    BloodRequestEntity findById(int id);
 }

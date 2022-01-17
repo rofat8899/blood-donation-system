@@ -45,10 +45,10 @@ public class UserController {
         return userDetailService.addUserDetail(userDetailEntity);
     }
 
-    @PutMapping("/confirm/{email}")
-    public Object confirmBloodRequest(@PathVariable("email") String email, @RequestBody Map<String,Object> obj)
+    @PutMapping("/request/hospital-confirm/{email}")
+    public Object hospitalConfirmBloodRequest(@PathVariable("email") String email, @RequestBody Map<String,Object> obj)
     {
-        return confirmationRequestService.acceptRequest(email,obj);
+        return confirmationRequestService.acceptRequestByHospital(email,obj);
     }
 
     @PostMapping("/request")
@@ -59,6 +59,12 @@ public class UserController {
     @GetMapping("/request/{email}")
     public List<BloodRequestDTO> getBloodRequestByEmail(@PathVariable("email") String email){
         return bloodRequestService.getBloodRequestByEmail(email);
+    }
+
+    @PutMapping("/request/confirm/{id}")
+    public Object confirmBloodRequest(@PathVariable("id") int id,@RequestParam Map<String,Object> obj)
+    {
+        return confirmationRequestService.confirmRequest(id,obj);
     }
 
     @PostMapping("/donation/{hospital}")
