@@ -1,5 +1,7 @@
 package com.rofat.blooddonationsystem.Service;
 
+import com.rofat.blooddonationsystem.Dto.BloodRequestDTO;
+import com.rofat.blooddonationsystem.Dto.InboxDTO;
 import com.rofat.blooddonationsystem.Dto.ResponseMessage;
 import com.rofat.blooddonationsystem.Dto.UserDetailDTO;
 import com.rofat.blooddonationsystem.Entity.UserDetailEntity;
@@ -7,6 +9,7 @@ import com.rofat.blooddonationsystem.Repository.UserDetailRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +18,8 @@ import java.util.Map;
 public class UserDetailService {
     @Autowired
     private UserDetailRepo userDetailRepo;
+    @Autowired
+    private BloodRequestService bloodRequestService;
 
     public List<UserDetailDTO> getAllUserDetail() {
         List<UserDetailDTO> userDetailDTO = new ArrayList<>();
@@ -42,5 +47,27 @@ public class UserDetailService {
         else {
             return new ResponseMessage("Failed to login");
         }
+    }
+
+    public List<InboxDTO> getInboxbyEmail(String email) {
+        List<InboxDTO> inboxDTO = new ArrayList<>();
+        List<BloodRequestDTO> bloodRequestDTOList = bloodRequestService.getBloodRequestByEmail(email);
+        UserDetailDTO userDetailDTO= getUserDetailByEmail(email);
+        String header,date,body;
+        for(BloodRequestDTO each : bloodRequestDTOList) {
+            if ("ACCEPTED".equals(each.getRequestStatus()))
+            {
+                UserDetailDTO donorDetailDTO= getUserDetailByEmail(each.getDonorEmail());
+                header="Congratulations,"+userDetailDTO.getName()+".";
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+                date = each.getDonorSetDate().format(formatter);
+                body="<html>Your request for blood type A donation has been accepted by " +donorDetailDTO.getName()+
+                        "<br>" +
+                        "We have listed all the needed information of you donor for you," +
+                        "please click on See Detail button to see the detail information.</html>";
+                inboxDTO.add(new InboxDTO(header,date,body));
+            }
+        }
+        return inboxDTO;
     }
 }

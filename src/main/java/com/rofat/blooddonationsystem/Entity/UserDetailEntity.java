@@ -34,19 +34,4 @@ public class UserDetailEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private UserContactEntity contact;
 
-    @Override
-    public String toString() {
-        return "UserDetailEntity{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", gender='" + gender + '\'' +
-                ", age='" + age + '\'' +
-                ", bloodType='" + bloodType + '\'' +
-                ", userType='" + userType + '\'' +
-                ", address=" + address +
-                ", contact=" + contact +
-                '}';
-    }
 }

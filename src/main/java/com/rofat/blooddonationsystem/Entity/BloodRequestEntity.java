@@ -28,6 +28,10 @@ public class BloodRequestEntity {
     private String bloodReceviedId;
     @Column(name="BLOOD_RECEIVED_DATE")
     private LocalDateTime bloodReceivedDate;
+    @Column(name="DONOR_EMAIL")
+    private String donorEmail;
+    @Column(name="DONOR_SET_DATE")
+    private LocalDateTime donorSetDate;
     @Column(name="PRIORITY_STATUS")
     private String priorityStatus;
     @Column(name="REQUEST_STATUS")

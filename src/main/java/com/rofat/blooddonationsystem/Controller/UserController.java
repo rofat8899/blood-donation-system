@@ -1,9 +1,6 @@
 package com.rofat.blooddonationsystem.Controller;
 
-import com.rofat.blooddonationsystem.Dto.BloodDonationDTO;
-import com.rofat.blooddonationsystem.Dto.BloodRequestDTO;
-import com.rofat.blooddonationsystem.Dto.ConfirmRequestDTO;
-import com.rofat.blooddonationsystem.Dto.UserDetailDTO;
+import com.rofat.blooddonationsystem.Dto.*;
 import com.rofat.blooddonationsystem.Entity.BloodDonationEntity;
 import com.rofat.blooddonationsystem.Entity.BloodRequestEntity;
 import com.rofat.blooddonationsystem.Entity.UserDetailEntity;
@@ -77,8 +74,18 @@ public class UserController {
         return bloodDonationService.getBloodDonationByEmail(email);
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public Object login(@RequestBody Map<String,Object> obj){
         return userDetailService.login(obj);
+    }
+
+    @GetMapping("/hospital")
+    public List<Object> getHospital(){
+        return null;
+    }
+
+    @GetMapping("/inbox/{email}")
+    public List<InboxDTO> getInboxbyEmail(@PathVariable("email") String email){
+        return userDetailService.getInboxbyEmail(email);
     }
 }
