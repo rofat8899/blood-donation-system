@@ -28,8 +28,9 @@ public class BloodRequestDTO {
         this.requestBloodType = bloodRequestEntity.getRequestBloodType();
         this.bloodReceviedId = bloodRequestEntity.getBloodReceviedId();
         this.bloodReceivedDate = bloodRequestEntity.getBloodReceivedDate();
-        this.donorEmail = bloodRequestEntity.getDonorEmail();
         this.donorSetDate = bloodRequestEntity.getDonorSetDate();
+        this.donorEmail = bloodRequestEntity.getDonorEmail();
+
         this.priorityStatus = bloodRequestEntity.getPriorityStatus();
         this.requestStatus = bloodRequestEntity.getRequestStatus();
         this.remark = bloodRequestEntity.getRemark();
