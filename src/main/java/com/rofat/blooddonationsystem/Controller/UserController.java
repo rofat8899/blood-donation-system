@@ -64,9 +64,14 @@ public class UserController {
         return confirmationRequestService.confirmRequest(id,obj);
     }
 
-    @PostMapping("/donation/{hospital}")
-    public Object addBloodDonation(@RequestBody BloodDonationEntity bloodDonationEntity,@PathVariable("hospital") String hospital){
-        return bloodDonationService.addBloodDonation(bloodDonationEntity,hospital);
+    @PostMapping("/donation/{hospital}/{email}")
+    public Object addBloodDonation(@PathVariable("email") String email,@PathVariable("hospital") String hospital){
+        return bloodDonationService.addBloodDonation(email,hospital);
+    }
+
+    @PostMapping("/donation")
+    public Object addPendingBloodDonation(@RequestBody BloodDonationEntity bloodDonationEntity){
+        return bloodDonationService.addPendingBloodDonation(bloodDonationEntity);
     }
 
     @GetMapping("/donation/{email}")

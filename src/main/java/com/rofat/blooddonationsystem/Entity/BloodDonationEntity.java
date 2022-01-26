@@ -22,6 +22,8 @@ public class BloodDonationEntity {
     private String donorEmail;
     @Column(name="DONATED_AT")
     private String donatedAt;
+    @Column(name="AVAILABLE_DATE")
+    private String availableDate;
     @Column(name="STATUS")
     private String status;
     @Column(name="REMARK")

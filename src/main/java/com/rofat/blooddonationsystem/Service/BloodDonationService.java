@@ -37,12 +37,22 @@ public class BloodDonationService {
         return bloodDonationDTO;
     }
 
-    public Object addBloodDonation(BloodDonationEntity bloodDonationEntity,String hospital) {
+    public Object addBloodDonation(String email,String hospital) {
+        BloodDonationEntity bloodDonationEntity = bloodDonationRepo.findByDonorEmailAndStatus(email,"PENDING");
         if(userDetailRepo.existsByEmail(bloodDonationEntity.getDonorEmail()))
         {
             bloodDonationEntity.setDonatedAt(userDetailRepo.findByNameAndUserType(hospital,"HOSPITAL").getName());
             bloodDonationEntity.setDonatedDate(LocalDateTime.now());
             bloodDonationEntity.setStatus("AVAILABLE");
+            return new BloodDonationDTO(bloodDonationRepo.save(bloodDonationEntity));
+        }
+        return new ResponseMessage("User is not existed");
+    }
+
+    public Object addPendingBloodDonation(BloodDonationEntity bloodDonationEntity) {
+        if(userDetailRepo.existsByEmail(bloodDonationEntity.getDonorEmail()))
+        {
+            bloodDonationEntity.setStatus("PENDING");
             return new BloodDonationDTO(bloodDonationRepo.save(bloodDonationEntity));
         }
         return new ResponseMessage("User is not existed");

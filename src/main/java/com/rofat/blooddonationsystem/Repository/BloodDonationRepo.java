@@ -9,6 +9,6 @@ public interface BloodDonationRepo extends JpaRepository<BloodDonationEntity,Int
     List<BloodDonationEntity> findByDonorEmail(String email);
     List<BloodDonationEntity> findAllByStatus(String status);
     List<BloodDonationEntity> findAllByStatusAndDonatedAt(String status,String donatedAt);
-//    List<BloodDonationEntity> findByStatus(String status);
     List<BloodDonationEntity> findAllByDonatedAt(String status);
+    BloodDonationEntity findByDonorEmailAndStatus(String email,String status);
 }
