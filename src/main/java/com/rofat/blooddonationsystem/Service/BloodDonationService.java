@@ -93,4 +93,15 @@ public class BloodDonationService {
         }
         return bloodDonationDTO;
     }
+
+    public List<BloodDonationDTO> getAllPendingBloodDonationByBloodType(String bloodType) {
+        List<BloodDonationDTO> bloodDonationDTO = new ArrayList<>();
+        for(BloodDonationEntity each:bloodDonationRepo.findAllByStatus("PENDING"))
+        {
+            if(userDetailRepo.findByEmail(each.getDonorEmail()).getBloodType().contains(bloodType)){
+                bloodDonationDTO.add(new BloodDonationDTO(each));
+            }
+        }
+        return bloodDonationDTO;
+    }
 }
