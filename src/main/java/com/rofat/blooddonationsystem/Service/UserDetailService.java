@@ -78,4 +78,8 @@ public class UserDetailService {
         }
         return inboxDTO;
     }
+
+    public List<UserDetailDTO> getAllHospital() {
+        return userDetailRepo.findByUserType("HOSPITAL");
+    }
 }

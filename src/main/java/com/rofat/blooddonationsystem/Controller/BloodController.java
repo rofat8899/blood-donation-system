@@ -35,6 +35,11 @@ public class BloodController {
         return bloodDonationService.getAllBloodAvailableDonation();
     }
 
+    @GetMapping("/donation/pending")
+    public List<BloodDonationDTO> getAllPendingBloodDonation(){
+        return bloodDonationService.getAllBloodPendingDonation();
+    }
+
     @GetMapping("/donation/available/{hospital}")
     public List<BloodDonationDTO> getAllAvailableBloodDonationByHospital(@PathVariable("hospital") String hospital){
         return bloodDonationService.getAllBloodAvailableDonationByHospital(hospital);

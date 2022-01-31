@@ -85,8 +85,8 @@ public class UserController {
     }
 
     @GetMapping("/hospital")
-    public List<Object> getHospital(){
-        return null;
+    public List<UserDetailDTO> getHospital(){
+        return userDetailService.getAllHospital();
     }
 
     @GetMapping("/inbox/{email}")
