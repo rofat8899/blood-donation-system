@@ -13,5 +13,5 @@ public interface UserDetailRepo extends JpaRepository<UserDetailEntity,Integer> 
     Boolean existsByEmailAndBloodType(String email,String bloodType);
     Boolean existsByEmailAndPasswordAndUserType(String email,String password,String userType);
     Boolean existsByEmailAndPassword(String email,String password);
-    List<UserDetailDTO> findByUserType(String userType);
+    List<UserDetailEntity> findAllByUserType(String userType);
 }

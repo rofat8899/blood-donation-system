@@ -80,6 +80,10 @@ public class UserDetailService {
     }
 
     public List<UserDetailDTO> getAllHospital() {
-        return userDetailRepo.findByUserType("HOSPITAL");
+        List<UserDetailDTO> userDetailDTO = new ArrayList<>();
+        for (UserDetailEntity each : userDetailRepo.findAllByUserType("HOSPITAL")) {
+            userDetailDTO.add(new UserDetailDTO(each));
+        }
+        return userDetailDTO;
     }
 }
